@@ -75,5 +75,14 @@ public class UserTest {
         answerer.acceptAnswer(answer);
     }
 
+    @Test
+    public void downVoteQuestionDoesNotAffectRep() throws Exception {
+        int rep = asker.getReputation();
+
+        answerer.downVote(question);
+
+        assertEquals(rep, asker.getReputation());
+    }
+
 
 }
