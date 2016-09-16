@@ -1,7 +1,10 @@
 package com.teamtreehouse.techdegree.overboard.model;
 
+import com.teamtreehouse.techdegree.overboard.exc.VotingException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +15,9 @@ public class UserTest {
     private User answerer;
     private Question question;
     private Answer answer;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -48,5 +54,14 @@ public class UserTest {
 
         assertEquals(rep + 15, answerer.getReputation());
     }
+
+    @Test
+    public void userCannotUpvoteOwnPost() throws Exception {
+        thrown.expect(VotingException.class);
+        thrown.expectMessage("You cannot vote for yourself!");
+
+        asker.upVote(question);
+    }
+    
 
 }
