@@ -40,5 +40,13 @@ public class UserTest {
         assertEquals(rep + 10, answerer.getReputation());
     }
 
+    @Test
+    public void afterAnswerAcceptanceAnswerersRepIncremented() throws Exception {
+        int rep = answerer.getReputation();
+
+        asker.acceptAnswer(answer);
+
+        assertEquals(rep + 15, answerer.getReputation());
+    }
 
 }
