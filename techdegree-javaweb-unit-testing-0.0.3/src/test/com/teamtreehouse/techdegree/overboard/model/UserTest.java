@@ -8,24 +8,36 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     private Board board;
-    private User user;
-    private User otherUser;
+    private User asker;
+    private User answerer;
+    private Question question;
+    private Answer answer;
 
     @Before
     public void setUp() throws Exception {
         board = new Board("Java");
-        user = board.createUser("anon");
-        otherUser = board.createUser("dude");
+        asker = board.createUser("anon");
+        answerer = board.createUser("dude");
+        question = asker.askQuestion("Is this thing on?");
+        answer = answerer.answerQuestion(question, "It appears so.");
     }
 
     @Test
     public void afterUpvoteQuestionersRepIncremented() throws Exception {
-        Question question = user.askQuestion("Is this thing on?");
-        int rep = user.getReputation();
+        int rep = asker.getReputation();
 
-        otherUser.upVote(question);
+        answerer.upVote(question);
 
-        assertEquals(rep + 5, user.getReputation());
+        assertEquals(rep + 5, asker.getReputation());
+    }
+
+    @Test
+    public void afterUpvoteAnswerersRepIncremented() throws Exception {
+        int rep = answerer.getReputation();
+
+        asker.upVote(answer);
+
+        assertEquals(rep + 10, answerer.getReputation());
     }
 
 
