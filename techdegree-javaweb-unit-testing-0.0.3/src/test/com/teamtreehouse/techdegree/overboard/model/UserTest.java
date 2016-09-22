@@ -1,7 +1,6 @@
 package com.teamtreehouse.techdegree.overboard.model;
 
-import com.teamtreehouse.techdegree.overboard.exc.AnswerAcceptanceException;
-import com.teamtreehouse.techdegree.overboard.exc.VotingException;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
